@@ -1,4 +1,15 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Xml.Schema;
+
+/*
+* Name: Zander Malone
+* Course: CSCI 1250, Section 001
+* Assignment: Lab 06, Three Short Problems
+* Date: October 23, 2026
+* Description: A menu that keeps running until the user quits, offering three
+* independent exercises or all three at once. Each exercise
+* practices decisions and one of the four loops.
+*/
 
 int choice = 0;
 Random rng = new Random(4000);
@@ -10,7 +21,7 @@ do
     
     choice = Convert.ToInt32(Console.ReadLine());
 
-
+    //EXERCISE 1
     if(choice == 1 || choice == 4)
     {
         int score = -5;
@@ -62,7 +73,7 @@ do
         }
     }
 
-
+    //EXERCISE 2
     if(choice == 2 || choice == 4)
     {
         int rollNum = 1;
@@ -106,13 +117,42 @@ do
 
         }while(reroll != "n");
 
-        Console.WriteLine($"You rolled {rollNum} times and won {winNum}.\n");
+        Console.WriteLine($"You rolled {rollNum - 1} times and won {winNum}.\n");
     }
 
-
+    //EXERCISE 3
     if(choice == 3 || choice == 4)
     {
-        
+        Console.WriteLine("=== Exercise 3: The Score Report ===\n");
+
+        int[] grades = new int[5];
+        int passCount = 0;
+
+        //this loop allows for user input for each grade, going up to 5 since grade[] is limited to 5 slots.
+        for(int i= 0; i < grades.Length; i++)
+        {
+            Console.Write($"Score {i+1}: ");
+            grades[i] = Convert.ToInt32(Console.ReadLine()); 
+        }
+
+        //this foreach loop follows up the for loop by checking the inputs in the for loop to see if the grades pass.
+        foreach(int grade in grades)
+        {
+            if(grade > 60)
+            {
+                passCount++;
+            }
+        }
+
+       double gradeSum = (grades[0] + grades[1] + grades[2] + grades[3] + grades[4]);
+
+       Console.WriteLine(" ");
+       Console.WriteLine($"Scores entered: {grades.Length}");
+       Console.WriteLine($"Total: {gradeSum}");
+       Console.WriteLine($"Average: {gradeSum / grades.Length}");
+       Console.WriteLine($"Highest: {grades.Max()}");
+       Console.WriteLine($"Passing: {passCount} of {grades.Length}");
+
     }
 
 
@@ -120,7 +160,6 @@ do
     {
         Console.WriteLine("Invalid input. Please try again.\n");
     }
-
 
 }while (choice != 5);
 
